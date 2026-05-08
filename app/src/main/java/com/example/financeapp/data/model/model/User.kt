@@ -1,8 +1,7 @@
-package com.example.financeapp.data.model
+package com.example.financeapp.data.model.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
 
 @Entity(tableName = "users")
 data class User(
