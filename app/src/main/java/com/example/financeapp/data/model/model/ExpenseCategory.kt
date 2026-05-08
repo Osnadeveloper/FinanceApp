@@ -1,7 +1,4 @@
-package com.example.financeapp.data.model
-
-
-
+package com.example.financeapp.data.model.model
 
 enum class ExpenseCategory (val displayName: String) {
     FOOD("alimentacion"),

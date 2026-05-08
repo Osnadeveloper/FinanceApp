@@ -1,7 +1,8 @@
-package com.example.financeapp.data.model
+package com.example.financeapp.data.model.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.financeapp.data.model.model.ExpenseCategory
 
 @Entity(tableName = "expenses")
 

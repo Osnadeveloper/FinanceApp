@@ -6,8 +6,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.financeapp.data.model.Budget
-import com.example.financeapp.data.model.ExpenseCategory
+import com.example.financeapp.data.model.model.Budget
+import com.example.financeapp.data.model.model.ExpenseCategory
 import kotlinx.coroutines.flow.Flow
 
 @Dao

@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
-import com.example.financeapp.data.model.User
+import com.example.financeapp.data.model.model.User
 import kotlinx.coroutines.flow.Flow
 
 @Dao
