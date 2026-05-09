@@ -1,6 +1,7 @@
 package com.example.financeapp.viewmodel
 
 import android.app.Application
+import android.os.Message
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.financeapp.data.model.database.AppDatabase
@@ -8,6 +9,7 @@ import com.example.financeapp.data.model.model.User
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import java.security.MessageDigest
 
 class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -25,23 +27,32 @@ class AuthViewModel(application: Application) : AndroidViewModel(application) {
 
             try {
                 val user = userDao.getUserByEmail(email)
-                if (user != null && user.passwordHash == hashPassword(password))
-                    _currentUser.value = user
+                if(user != null && user.passwordHash == hashPassword(password)){
+                    _currentUser.value=user
                     _authState.value = AuthState.Success
 
+                }else{
+                    _authState.value= AuthState.Error("Email o contraseña incorrecta")
+                }
 
-            } catch (e: Exception){
+            }catch (e: Exception){
 
+                _authState.value= AuthState.Error("Error al iniciar sesion: ${e.message}")
             }
-
-        }
     }
 
-    sealed class AuthState{
+    }
 
+    private  fun  hashPassword(password: String): String{
+        val bytes = MessageDigest.getInstance("SHA-256").digest(password.toByteArray())
+        return bytes.joinToString(separator = ""){"%02".format(it)}
+    }
+    sealed class AuthState {
         object Idle : AuthState()
-        object Loading : AuthState()
-        object Success : AuthState()
-        data class Error(val message: String) : AuthState()
+        object Loading : AuthState ()
+        object Success : AuthState ()
+    data class  Error(val message: String): AuthState()
+
     }
+
 }
